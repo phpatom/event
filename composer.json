@@ -3,7 +3,7 @@
     "description": "A simple event dispatcher for php",
     "type": "library",
     "require": {
-        "phpatom/contracts": "^0.1.*"
+        "phpatom/contracts": "^0.1"
     },
     "autoload": {
         "psr-4": {
