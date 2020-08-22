@@ -1,0 +1,30 @@
+{
+    "name": "phpatom/event",
+    "description": "A simple event dispatcher for php",
+    "type": "library",
+    "require": {
+        "phpatom/contracts": "^0.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Atom\\Event\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Atom\\Event\\Test\\": "tests/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "dani-gouken",
+            "email": "nghokend@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpunit/phpunit": "^9.3",
+        "squizlabs/php_codesniffer": "^3.5"
+    }
+}
