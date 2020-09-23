@@ -5,15 +5,18 @@ namespace Atom\Event\Test;
 use Atom\Event\AbstractEventListener;
 use Atom\Event\EventDispatcher;
 use Atom\Event\EventListenerProvider;
+use Atom\Event\Exceptions\ListenerAlreadyAttachedToEvent;
 
 class AbstractEventListenerTest extends BaseEventTest
 {
-    private $stack = [];
     protected function buildListener()
     {
         return $this->getMockForAbstractClass(AbstractEventListener::class);
     }
 
+    /**
+     * @throws ListenerAlreadyAttachedToEvent
+     */
     public function testTheListenerIsCalledOnce()
     {
         $dispatcher = new EventDispatcher();
@@ -30,6 +33,9 @@ class AbstractEventListenerTest extends BaseEventTest
         $this->assertEquals(1, $listener->getCalls());
     }
 
+    /**
+     * @throws ListenerAlreadyAttachedToEvent
+     */
     public function testTheListenerIsCalledASpecificNumberOfTime()
     {
         $dispatcher = new EventDispatcher();
@@ -49,6 +55,9 @@ class AbstractEventListenerTest extends BaseEventTest
         $this->assertEquals(2, $listener->getCalls());
     }
 
+    /**
+     * @throws ListenerAlreadyAttachedToEvent
+     */
     public function testTheListenerIsNeverCalled()
     {
         $dispatcher = new EventDispatcher();
@@ -68,10 +77,14 @@ class AbstractEventListenerTest extends BaseEventTest
         $this->assertEquals(0, $listener->getCalls());
     }
 
+    /**
+     * @throws ListenerAlreadyAttachedToEvent
+     */
     public function testListenersAreOrdered()
     {
         $result = [];
         $h = $this->buildListener()->withHighPriority();
+
         $h->method("on")->willReturnCallback(function () use (&$result, $h) {
             $result[] = $h->getPriority();
         });

@@ -6,10 +6,13 @@ namespace Atom\Event\Test;
 use Atom\Event\AbstractEvent;
 use Atom\Event\AbstractEventListener;
 use Atom\Event\EventDispatcher;
+use Atom\Event\Exceptions\ListenerAlreadyAttachedToEvent;
 
 class AbstractEventTest extends BaseEventTest
 {
-
+    /**
+     * @throws ListenerAlreadyAttachedToEvent
+     */
     public function testThePropagationIsStopped()
     {
         $event = $this->getMockForAbstractClass(AbstractEvent::class);

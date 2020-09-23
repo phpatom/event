@@ -2,13 +2,11 @@
 namespace Atom\Event\Test;
 
 use InvalidArgumentException;
-use Atom\Contracts\Events\EventContract;
-use Atom\Contracts\Events\EventListenerContract;
-use Atom\Contracts\Events\EventListenerProviderContract;
+use Atom\Event\Contracts\EventListenerProviderContract;
 use Atom\Event\EventDispatcher;
 use Atom\Event\Exceptions\ListenerAlreadyAttachedToEvent;
 use PHPUnit\Framework\MockObject\MockObject;
-use Prophecy\Prophecy\ObjectProphecy;
+use StdClass;
 use TypeError;
 
 class EventDispatcherTest extends BaseEventTest
@@ -23,6 +21,9 @@ class EventDispatcherTest extends BaseEventTest
         $this->assertSame($newDispatcher, EventDispatcher::getInstance());
     }
 
+    /**
+     * @throws ListenerAlreadyAttachedToEvent
+     */
     public function testItAddEventListener()
     {
         $dispatcher = new EventDispatcher();
@@ -43,6 +44,9 @@ class EventDispatcherTest extends BaseEventTest
         $this->assertCount(3, $dispatcher->getListeners()[$event]);
     }
 
+    /**
+     * @throws ListenerAlreadyAttachedToEvent
+     */
     public function testItGenerateANewEmptyInstance()
     {
         $event = "bar event";
@@ -54,6 +58,9 @@ class EventDispatcherTest extends BaseEventTest
         $this->assertEmpty($dispatcher->getListeners());
     }
 
+    /**
+     * @throws ListenerAlreadyAttachedToEvent
+     */
     public function testItThrowAnExceptionIfTheListenerIsAlreadyBoundToAnTheEvent()
     {
         $dispatcher = EventDispatcher::newInstance();
@@ -64,6 +71,9 @@ class EventDispatcherTest extends BaseEventTest
         $dispatcher->addEventListener($event, $listener);
     }
 
+    /**
+     * @throws ListenerAlreadyAttachedToEvent
+     */
     public function testItAddEventListeners()
     {
         $dispatcher = new EventDispatcher();
@@ -86,6 +96,9 @@ class EventDispatcherTest extends BaseEventTest
         ]);
     }
 
+    /**
+     * @throws ListenerAlreadyAttachedToEvent
+     */
     public function testItCheckTheTypeWhenListenersAreAdded()
     {
         $dispatcher = new EventDispatcher();
@@ -93,13 +106,19 @@ class EventDispatcherTest extends BaseEventTest
         $dispatcher->addEventListeners(["bar"=>"baz"]);
     }
 
+    /**
+     * @throws ListenerAlreadyAttachedToEvent
+     */
     public function testItCheckTheTypeOfTheEventWhenDispatchIsCalled()
     {
         $this->expectException(InvalidArgumentException::class);
         $dispatcher = new EventDispatcher();
-        $dispatcher->dispatch(new \StdClass());
+        $dispatcher->dispatch(new StdClass());
     }
 
+    /**
+     * @throws ListenerAlreadyAttachedToEvent
+     */
     public function testItDispatchAnEvent()
     {
         $dispatcher = new EventDispatcher();
@@ -125,6 +144,9 @@ class EventDispatcherTest extends BaseEventTest
         $dispatcher->dispatch($event2);
     }
 
+    /**
+     * @throws ListenerAlreadyAttachedToEvent
+     */
     public function testAListenerIsNotCalledIfItIsNotActive()
     {
         $listener = $this->buildListener();
@@ -135,6 +157,9 @@ class EventDispatcherTest extends BaseEventTest
         $dispatcher->dispatch($event);
     }
 
+    /**
+     * @throws ListenerAlreadyAttachedToEvent
+     */
     public function testEventListenerProvidersAreDispatched()
     {
         $dispatcher = new EventDispatcher();
@@ -170,6 +195,9 @@ class EventDispatcherTest extends BaseEventTest
         $dispatcher->dispatch($event2);
     }
 
+    /**
+     * @throws ListenerAlreadyAttachedToEvent
+     */
     public function testEventListenersAreExecutedInTheRightOrder()
     {
         $result = [];

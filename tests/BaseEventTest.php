@@ -2,8 +2,8 @@
 
 namespace Atom\Event\Test;
 
-use Atom\Contracts\Events\EventContract;
-use Atom\Contracts\Events\EventListenerContract;
+use Atom\Event\Contracts\EventContract;
+use Atom\Event\Contracts\EventListenerContract;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
