@@ -3,8 +3,8 @@
 
 namespace Atom\Event\Exceptions;
 
+use Atom\Event\Contracts\EventListenerContract;
 use Exception;
-use Atom\Contracts\Events\EventListenerContract;
 
 class ListenerAlreadyAttachedToEvent extends Exception
 {

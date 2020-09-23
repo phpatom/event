@@ -3,7 +3,7 @@
 
 namespace Atom\Event;
 
-use Atom\Contracts\Events\EventContract;
+use Atom\Event\Contracts\EventContract;
 
 abstract class AbstractEvent implements EventContract
 {

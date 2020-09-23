@@ -4,8 +4,8 @@
 namespace Atom\Event;
 
 use InvalidArgumentException;
-use Atom\Contracts\Events\EventContract;
-use Atom\Contracts\Events\EventListenerContract;
+use Atom\Event\Contracts\EventContract;
+use Atom\Event\Contracts\EventListenerContract;
 
 abstract class AbstractEventListener implements EventListenerContract
 {

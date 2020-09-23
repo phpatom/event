@@ -4,10 +4,10 @@
 namespace Atom\Event;
 
 use InvalidArgumentException;
-use Atom\Contracts\Events\EventContract;
-use Atom\Contracts\Events\EventDispatcherContract;
-use Atom\Contracts\Events\EventListenerContract;
-use Atom\Contracts\Events\EventListenerProviderContract;
+use Atom\Event\Contracts\EventContract;
+use Atom\Event\Contracts\EventDispatcherContract;
+use Atom\Event\Contracts\EventListenerContract;
+use Atom\Event\Contracts\EventListenerProviderContract;
 use Atom\Event\Exceptions\ListenerAlreadyAttachedToEvent;
 
 class EventDispatcher implements EventDispatcherContract
@@ -122,7 +122,6 @@ class EventDispatcher implements EventDispatcherContract
         $listeners = $this->reorderListeners($listeners);
         foreach ($listeners as $listener) {
             /**
-             * @var $listener EventListenerContract
              * @ver $event AbstractEvent
              */
             if ($listener->canBeCalled() && !$event->isPropagationStopped()) {
@@ -149,7 +148,7 @@ class EventDispatcher implements EventDispatcherContract
      * @param $listeners EventListenerContract[]
      * @return EventListenerContract[]
      */
-    private function reorderListeners($listeners):array
+    private function reorderListeners(array $listeners):array
     {
         uasort($listeners, function ($k, $v) {
             /**

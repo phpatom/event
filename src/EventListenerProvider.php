@@ -3,7 +3,7 @@
 
 namespace Atom\Event;
 
-use Atom\Contracts\Events\EventListenerProviderContract;
+use Atom\Event\Contracts\EventListenerProviderContract;
 
 class EventListenerProvider implements EventListenerProviderContract
 {
