@@ -22,7 +22,8 @@ abstract class AbstractEventListener implements EventListenerContract
     protected $calls = 0;
     protected $maxCall;
 
-    abstract function on(EventContract $event):void;
+    abstract public function on($event):void;
+
     public function handle(EventContract $event): void
     {
         $this->calls++;
